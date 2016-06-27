@@ -29,6 +29,9 @@
 @property (nonatomic) CGFloat itemWidth;
 @property (nonatomic) UIView *backgroundView;
 
+//中间发布按钮
+@property (nonatomic, strong) UIButton *pulishBtn;
+
 @end
 
 @implementation RDVTabBar
@@ -58,6 +61,11 @@
     [self addSubview:_backgroundView];
     
     [self setTranslucent:NO];
+    
+#warning -- 添加发布按钮
+    //添加中间发布按钮
+    self.pulishBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
+    [self addSubview:self.pulishBtn];
 }
 
 - (void)layoutSubviews {
@@ -90,25 +98,25 @@
     }
     
 #warning -- 添加发布按钮
-    //添加中间发布按钮
-    UIButton *pulishBtn = [UIButton buttonWithType:(UIButtonTypeCustom)];
-    [pulishBtn setBackgroundImage:[UIImage imageNamed:@"pulishNew"] forState:(UIControlStateNormal)];
-    pulishBtn.frame = CGRectMake((self.bounds.size.width - 50) / 2, self.bounds.origin.y - 20, 50, 50);
-    pulishBtn.layer.masksToBounds = YES;
-    pulishBtn.layer.cornerRadius = 50 / 2;
-    
-    [self addSubview:pulishBtn];
+    //修正发布按钮位置
+    [self.pulishBtn setBackgroundImage:[UIImage imageNamed:@"pulishNew"] forState:(UIControlStateNormal)];
+    self.pulishBtn.frame = CGRectMake((self.bounds.size.width - 50) / 2, self.bounds.origin.y - 20, 50, 50);
+    self.pulishBtn.layer.masksToBounds = YES;
+    self.pulishBtn.layer.cornerRadius = 50 / 2;
 }
 
 //#pragma mark -- 扩大选区：by NJ
 - (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
     // 设置选区
     if (!self.hidden) {
-        CGFloat pointW = 50;
-        CGFloat pointH = 50;
-        CGFloat pointX = (self.bounds.size.width - 50) / 2;
-        CGFloat pointY = self.bounds.origin.y - 20;
-        CGRect rect = CGRectMake(pointX, pointY, pointW, pointH);
+        /****
+         CGFloat pointW = 50;
+         CGFloat pointH = 50;
+         CGFloat pointX = (self.bounds.size.width - 50) / 2;
+         CGFloat pointY = self.bounds.origin.y - 20;
+         CGRect rect = CGRectMake(pointX, pointY, pointW, pointH);
+         ****/
+        CGRect rect = self.pulishBtn.frame;
         if (CGRectContainsPoint(rect, point)) {
             return [self.items objectAtIndex:1];
         }
