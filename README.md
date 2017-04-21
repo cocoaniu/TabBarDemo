@@ -7,6 +7,6 @@
 2.在RDVTabBarController.m中，自定义点击发布按钮触发事件
 
 # 效果展示
-![image](https://github.com/cocoaniu/TabBarDemo/tree/master/TabBarDemo/screenshot/tabbar.gif)
+![image](https://github.com/cocoaniu/TabBarDemo/blob/master/TabBarDemo/screenshot/tabbar.gif)
 
 
